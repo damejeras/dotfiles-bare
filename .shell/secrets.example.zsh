@@ -1,0 +1,2 @@
+export ANTHROPIC_API_KEY=
+export CODESTRAL_API_KEY=

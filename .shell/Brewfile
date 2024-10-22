@@ -1,0 +1,7 @@
+tap "homebrew/bundle"
+brew "fzf"
+brew "zoxide"
+brew "ripgrep"
+brew "neovim"
+brew "lazygit"
+brew "tmux"
