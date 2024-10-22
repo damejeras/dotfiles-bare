@@ -53,6 +53,12 @@ function _session() {
   fi
 }
 
+# Install custom prompts
+function _install_fabric_prompts() {
+	mkdir -p ~/.config/fabric/patterns/
+	cp -a ~/.prompts/* ~/.config/fabric/patterns/
+}
+
 # This is a hack to prevent adding functions to history.
 alias assist=" _assist"
 alias t=" _session"
