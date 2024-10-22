@@ -25,16 +25,16 @@ function _session() {
     return 0
   fi
 
-  FOLDER=$(basename "$ZOXIDE_RESULT")
-  SESSION_NAME="${FOLDER// /_}"
-  SESSION_NAME="${SESSION_NAME//./_}"
+  SESSION_PATH="$ZOXIDE_RESULT"
+  SESSION_NAME="${SESSION_PATH##*/}"
 
-  SESSION=$(tmux list-sessions 2> /dev/null | grep "$SESSION_NAME" | awk '{print $1}')
+  SESSION=$(tmux list-sessions 2> /dev/null | grep "$SESSION_NAME" | awk '{print $1}' | grep -v "${SESSION_NAME}_")  # Exclude similar names
+
   SESSION="${SESSION//:/}"
 
   if [ -z "$TMUX" ]; then
     if [ -z "$SESSION" ]; then
-      cd "$ZOXIDE_RESULT"
+      cd "$SESSION_PATH"
       tmux new-session -s "$SESSION_NAME"
     else
       tmux attach -t "$SESSION"
@@ -42,7 +42,7 @@ function _session() {
   else
     CURRENT_SESSION=$(tmux display-message -p '#S')
     if [ -z "$SESSION" ]; then
-      cd "$ZOXIDE_RESULT"
+      cd "$SESSION_PATH"
       tmux new-session -d -s "$SESSION_NAME"
       tmux set-env -t "$SESSION_NAME" LAST_TMUX_SESSION "$CURRENT_SESSION"
       tmux switch-client -t "$SESSION_NAME"
