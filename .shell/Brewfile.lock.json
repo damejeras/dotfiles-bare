@@ -2,7 +2,7 @@
   "entries": {
     "tap": {
       "homebrew/bundle": {
-        "revision": "0a3cc2a0863d2cacfcdfd321a7c19037921cd335"
+        "revision": "2de432e11bb93741a5d588cdf2d5d5428796827b"
       }
     },
     "brew": {
@@ -788,7 +788,7 @@
   "system": {
     "linux": {
       "Arch Linux": {
-        "HOMEBREW_VERSION": "4.4.2",
+        "HOMEBREW_VERSION": "4.4.4",
         "HOMEBREW_PREFIX": "/home/linuxbrew/.linuxbrew",
         "Homebrew/homebrew-core": "api",
         "GCC": "14.2.1"
