@@ -1,6 +1,6 @@
 # Assistant
 function _assist() {
-  output=$(echo -n "$@" | fabric -p shell_command)
+  output=$(echo -n "$@" | fabric --pattern shell_command)
   echo "$output"
   vared -p "Do you want to evaluate the command? (y/n) " -c choice
   if [[ $choice == y ]]; then
@@ -34,16 +34,14 @@ function _session() {
 
   if [ -z "$TMUX" ]; then
     if [ -z "$SESSION" ]; then
-      cd "$SESSION_PATH"
-      tmux new-session -s "$SESSION_NAME"
+      tmux new-session -s "$SESSION_NAME" -c "$SESSION_PATH"
     else
       tmux attach -t "$SESSION"
     fi
   else
     CURRENT_SESSION=$(tmux display-message -p '#S')
     if [ -z "$SESSION" ]; then
-      cd "$SESSION_PATH"
-      tmux new-session -d -s "$SESSION_NAME"
+      tmux new-session -d -s "$SESSION_NAME" -c "$SESSION_PATH"
       tmux set-env -t "$SESSION_NAME" LAST_TMUX_SESSION "$CURRENT_SESSION"
       tmux switch-client -t "$SESSION_NAME"
     else
