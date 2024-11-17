@@ -60,14 +60,17 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
+# Source secrets
+source $HOME/.shell/secrets.zsh
+
+# Source history
+source $HOME/.shell/history.zsh
+
 # Source aliases
 source $HOME/.shell/aliases.zsh
 
 # Source functions
 source $HOME/.shell/functions.zsh
-
-# Source secrets
-source $HOME/.shell/secrets.zsh
 
 # Enable shell integrations
 eval "$(fzf --zsh)"
