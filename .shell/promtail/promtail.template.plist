@@ -17,7 +17,8 @@
 	<key>ProgramArguments</key>
 	<array>
 		<string>/opt/homebrew/opt/promtail/bin/promtail</string>
-		<string>-config.file=/Users/dariusm/.shell/promtail-config.yaml</string>
+		<string>-config.file=${HOME}/.shell/promtail/config.yaml</string>
+		<string>-config.expand-env=true</string>
 	</array>
 	<key>RunAtLoad</key>
 	<true/>

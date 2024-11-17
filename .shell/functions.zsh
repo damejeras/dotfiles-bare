@@ -57,6 +57,15 @@ function _install_fabric_prompts() {
 	cp -a ~/.prompts/* ~/.config/fabric/patterns/
 }
 
+# Load promtail
+function _load_promtail {
+	launchctl unload $HOME/Library/LaunchAgents/promtail.plist
+	envsubst < $HOME/.shell/promtail/promtail.template.plist > $HOME/.shell/promtail/promtail.plist
+	envsubst < $HOME/.shell/promtail/config.template.yaml > $HOME/.shell/promtail/config.yaml
+	cp $HOME/.shell/promtail/promtail.plist $HOME/Library/LaunchAgents/promtail.plist
+	launchctl load $HOME/Library/LaunchAgents/promtail.plist
+}
+
 # This is a hack to prevent adding functions to history.
 alias assist=" _assist"
 alias t=" _session"
