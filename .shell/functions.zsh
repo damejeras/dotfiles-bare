@@ -51,6 +51,13 @@ function _session() {
   fi
 }
 
+# Load history
+function _shared_history() {
+    local time=${1:-24h}  # Default to 24h if no argument provided
+    local selected=$(logcli query '{service_name="zsh"}' --since=$time --addr=$HISTORY_LOKI_HOST --username=$HISTORY_LOKI_USERNAME --password=$HISTORY_LOKI_PASSWORD --output raw 2>/dev/null | fzf)
+    [[ -n "$selected" ]] && print -z "$selected"
+}
+
 # Install custom prompts
 function _install_fabric_prompts() {
 	mkdir -p ~/.config/fabric/patterns/
@@ -69,3 +76,4 @@ function _load_promtail {
 # This is a hack to prevent adding functions to history.
 alias assist=" _assist"
 alias t=" _session"
+alias h=" _shared_history"

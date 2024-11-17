@@ -2,6 +2,9 @@ export SECONDARY_HISTORY_FILE="$HOME/.shell/command_log"
 _log_command() {
     local cmd="$1"
     
+	# Skip empty or whitespace-only commands
+    [[ -z "${cmd// }" ]] && return 0
+
     # Remove trailing newline first
     cmd="${cmd%$'\n'}"
     
