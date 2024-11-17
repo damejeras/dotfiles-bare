@@ -54,7 +54,7 @@ function _session() {
 # Load history
 function _shared_history() {
     local time=${1:-24h}  # Default to 24h if no argument provided
-    local selected=$(logcli query '{service_name="zsh"}' --since=$time --addr=$HISTORY_LOKI_HOST --username=$HISTORY_LOKI_USERNAME --password=$HISTORY_LOKI_PASSWORD --output raw 2>/dev/null | fzf)
+    local selected=$(logcli query '{service_name="zsh"}' --since=$time --limit=1000 --addr=$HISTORY_LOKI_HOST --username=$HISTORY_LOKI_USERNAME --password=$HISTORY_LOKI_PASSWORD --output raw 2>/dev/null | fzf)
     [[ -n "$selected" ]] && print -z "$selected"
 }
 
