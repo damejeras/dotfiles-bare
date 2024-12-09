@@ -42,10 +42,8 @@ function _session() {
     CURRENT_SESSION=$(tmux display-message -p '#S')
     if [ -z "$SESSION" ]; then
       tmux new-session -d -s "$SESSION_NAME" -c "$SESSION_PATH"
-      tmux set-env -t "$SESSION_NAME" LAST_TMUX_SESSION "$CURRENT_SESSION"
       tmux switch-client -t "$SESSION_NAME"
     else
-      tmux set-env -t "$SESSION" LAST_TMUX_SESSION "$CURRENT_SESSION"
       tmux switch-client -t "$SESSION"
     fi
   fi
