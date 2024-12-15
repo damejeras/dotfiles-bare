@@ -28,7 +28,7 @@ function _session() {
   SESSION_PATH="$ZOXIDE_RESULT"
   SESSION_NAME="${SESSION_PATH##*/}"
 
-  SESSION=$(tmux list-sessions 2> /dev/null | grep "$SESSION_NAME" | awk '{print $1}' | grep -v "${SESSION_NAME}_")  # Exclude similar names
+  SESSION=$(tmux list-sessions 2> /dev/null | awk -v name="$SESSION_NAME" '$1 ~ "^"name":" {print $1}')
 
   SESSION="${SESSION//:/}"
 
