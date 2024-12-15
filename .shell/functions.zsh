@@ -11,42 +11,42 @@ function _assist() {
 
 # Tmux sessionizer
 function _session() {
-  if [ $# -eq 0 ]; then
+    if [ $# -eq 0 ]; then
+        if [ -z "$TMUX" ]; then
+            ZOXIDE_RESULT=$(zoxide query -l | fzf --reverse)
+        else
+            ZOXIDE_RESULT=$(zoxide query -l | fzf-tmux -p --reverse)
+        fi
+    else
+        ZOXIDE_RESULT=$(zoxide query $1)
+    fi
+
+    if [ -z "$ZOXIDE_RESULT" ]; then
+        return 0
+    fi
+
+    SESSION_PATH="$ZOXIDE_RESULT"
+    SESSION_NAME="${SESSION_PATH##*/}"
+    # Convert dots to underscores to match tmux behavior
+    TMUX_SESSION_NAME="${SESSION_NAME//[.]/_}"
+
+    SESSION=$(tmux list-sessions 2> /dev/null | awk -v name="$TMUX_SESSION_NAME" '$1 ~ "^"name":" {print $1}')
+    SESSION="${SESSION//:/}"
+
     if [ -z "$TMUX" ]; then
-      ZOXIDE_RESULT=$(zoxide query -l | fzf --reverse)
+        if [ -z "$SESSION" ]; then
+            tmux new-session -s "$TMUX_SESSION_NAME" -c "$SESSION_PATH"
+        else
+            tmux attach -t "$SESSION"
+        fi
     else
-      ZOXIDE_RESULT=$(zoxide query -l | fzf-tmux -p --reverse)
+        if [ -z "$SESSION" ]; then
+            tmux new-session -d -s "$TMUX_SESSION_NAME" -c "$SESSION_PATH"
+            tmux switch-client -t "$TMUX_SESSION_NAME"
+        else
+            tmux switch-client -t "$SESSION"
+        fi
     fi
-  else
-    ZOXIDE_RESULT=$(zoxide query $1)
-  fi
-
-  if [ -z "$ZOXIDE_RESULT" ]; then
-    return 0
-  fi
-
-  SESSION_PATH="$ZOXIDE_RESULT"
-  SESSION_NAME="${SESSION_PATH##*/}"
-
-  SESSION=$(tmux list-sessions 2> /dev/null | awk -v name="$SESSION_NAME" '$1 ~ "^"name":" {print $1}')
-
-  SESSION="${SESSION//:/}"
-
-  if [ -z "$TMUX" ]; then
-    if [ -z "$SESSION" ]; then
-      tmux new-session -s "$SESSION_NAME" -c "$SESSION_PATH"
-    else
-      tmux attach -t "$SESSION"
-    fi
-  else
-    CURRENT_SESSION=$(tmux display-message -p '#S')
-    if [ -z "$SESSION" ]; then
-      tmux new-session -d -s "$SESSION_NAME" -c "$SESSION_PATH"
-      tmux switch-client -t "$SESSION_NAME"
-    else
-      tmux switch-client -t "$SESSION"
-    fi
-  fi
 }
 
 # Load history
