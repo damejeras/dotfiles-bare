@@ -18,7 +18,24 @@ function _session() {
             ZOXIDE_RESULT=$(zoxide query -l | fzf-tmux -p --reverse)
         fi
     else
-        ZOXIDE_RESULT=$(zoxide query $1)
+        # Check if session exists first
+        SESSION_NAME="${1//[.]/_}"
+        SESSION=$(tmux list-sessions 2> /dev/null | awk -v name="$SESSION_NAME" '$1 ~ "^"name":" {print $1}')
+        SESSION="${SESSION//:/}"
+        
+        if [ -n "$SESSION" ]; then
+            if [ -z "$TMUX" ]; then
+                tmux attach -t "$SESSION"
+            else
+                tmux switch-client -t "$SESSION"
+            fi
+            return 0
+        fi
+        
+        # Create new session directory and initialize
+        SESSION_PATH="$HOME/Sessions/$1"
+        mkdir -p "$SESSION_PATH"
+        ZOXIDE_RESULT="$SESSION_PATH"
     fi
 
     if [ -z "$ZOXIDE_RESULT" ]; then
@@ -27,7 +44,6 @@ function _session() {
 
     SESSION_PATH="$ZOXIDE_RESULT"
     SESSION_NAME="${SESSION_PATH##*/}"
-    # Convert dots to underscores to match tmux behavior
     TMUX_SESSION_NAME="${SESSION_NAME//[.]/_}"
 
     SESSION=$(tmux list-sessions 2> /dev/null | awk -v name="$TMUX_SESSION_NAME" '$1 ~ "^"name":" {print $1}')
