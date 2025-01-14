@@ -1,0 +1,31 @@
+metadata:
+  author: CodeCompanion
+  version: 1.0.0
+  license: MIT
+
+kind: code
+
+extensions:
+  - keyString: log
+
+values:
+- beginString: \b[0-9a-zA-Z_]+(?==)
+  regularExpression: true
+
+numbers:
+- beginString: '(?i)\b(info|information|qinfo)\b'
+  regularExpression: true
+  
+- beginString: '(?i)\b(debug|qdebug)\b'
+  regularExpression: true
+
+commands:
+- beginString: '(?i)\b(warn|warning|qwarn)\b'
+  regularExpression: true
+  
+- beginString: '(?i)\b(error|err|fail|failure|qcritical)\b'
+  regularExpression: true
+  
+- beginString: '(?i)\b(crit|critical|fatal|qfatal)\b'
+  regularExpression: true
+
