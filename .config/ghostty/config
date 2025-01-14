@@ -1,0 +1,13 @@
+# Search entire scrollback history in default text editor
+keybind = cmd+f=write_scrollback_file:open
+
+# Search Selection
+# HOWTO: Cmd+triple_click to select your last output then press cmd+shift+f to search it
+keybind = cmd+shift+f=write_selection_file:open
+
+# RECOMMENDED: Set this to something big so you can capture all of your scrollback
+scrollback-limit = 20000000
+
+# How to change your system-wide default text editor to Sublime
+# brew install duti
+# duti -s com.sublimetext.4 public.plain-text all
