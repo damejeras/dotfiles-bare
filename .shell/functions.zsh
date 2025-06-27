@@ -88,7 +88,44 @@ function _load_promtail {
 	launchctl load $HOME/Library/LaunchAgents/promtail.plist
 }
 
+function kwipe() {
+  local ns="$1"
+  if [[ -z "$ns" ]]; then
+    echo "Usage: kwipe <namespace>"
+    return 1
+  fi
+
+  echo "Uninstalling all helm releases in the namespace"
+  helm ls --namespace "$ns" --short | xargs -L1 helm uninstall --namespace "$ns"
+
+  echo "Patching finalizers and deleting pods in namespace: $ns"
+
+  kubectl get pods -n "$ns" -o json | jq '.items[] | select(.metadata.finalizers) | .metadata.name' -r |
+    while read -r pod; do
+      echo "Patching pod $pod..."
+      kubectl patch pod "$pod" -n "$ns" -p '{"metadata":{"finalizers":[]}}' --type=merge
+    done
+
+  kubectl delete all -n "$ns" --all --force --grace-period=0
+
+  kubectl delete ns "$ns"
+}
+
+# Autocomplete function
+function _kwipe_namespace_complete() {
+  local -a ns
+  # Ensure the namespaces are separated by newline
+  ns=(${(f)"$(kubectl get ns -o jsonpath='{.items[*].metadata.name}' | tr ' ' '\n')"})
+
+  _describe 'namespace' ns
+}
+
+# Bind the completion function to the kwipe command
+compdef _kwipe_namespace_complete kwipe
+
 # This is a hack to prevent adding functions to history.
 alias assist=" _assist"
 alias t=" _session"
 alias h=" _shared_history"
+
+
