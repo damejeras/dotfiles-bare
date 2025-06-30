@@ -1,4 +1,4 @@
-theme = flexoki-dark
+theme = CobaltNext
 
 # Search entire scrollback history in default text editor
 # keybind = cmd+f=write_scrollback_file:open
@@ -16,7 +16,7 @@ scrollback-limit = 20000000
 # duti -s com.sublimetext.4 public.plain-text all
 
 # Optional underline adjustments
-adjust-underline-position = 2
+adjust-underline-position = 1
 adjust-underline-thickness = 1
 
 # Shell integration preserves terminfo in sudo
