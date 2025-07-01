@@ -1,4 +1,4 @@
-theme = "UltraDark"
+theme = "Galaxy"
 
 # Search entire scrollback history in default text editor
 # keybind = cmd+f=write_scrollback_file:open
@@ -17,11 +17,11 @@ scrollback-limit = 20000000
 
 # Optional underline adjustments
 adjust-underline-position = 1
-adjust-underline-thickness = 1
+adjust-underline-thickness = -50%
 
 # Shell integration preserves terminfo in sudo
 shell-integration = zsh
 shell-integration-features = sudo
 
-font-family = "VictorMono NFM Regular"
+font-family = "VictorMono NFM Medium"
 font-size = 13
