@@ -25,3 +25,5 @@ shell-integration-features = sudo
 
 font-family = "VictorMono NFM Medium"
 font-size = 13
+
+window-save-state = "always"
