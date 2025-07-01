@@ -32,6 +32,11 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 zinit light olets/zsh-window-title
 
+# Configure zsh-syntax-highlighting to disable path highlighting
+ZSH_HIGHLIGHT_STYLES[path]='fg=cyan'
+ZSH_HIGHLIGHT_STYLES[path_prefix]='fg=cyan'
+ZSH_HIGHLIGHT_STYLES[path_pathseparator]='fg=cyan'
+
 # Keybindings
 bindkey -e # Emacs mode
 bindkey '^p' history-search-backward

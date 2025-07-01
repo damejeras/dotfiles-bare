@@ -1,4 +1,4 @@
-theme = CobaltNext
+theme = "UltraDark"
 
 # Search entire scrollback history in default text editor
 # keybind = cmd+f=write_scrollback_file:open
@@ -23,5 +23,5 @@ adjust-underline-thickness = 1
 shell-integration = zsh
 shell-integration-features = sudo
 
-font-family = "JetBrainsMono NFM Light"
-font-size = 12
+font-family = "VictorMono NFM Regular"
+font-size = 13
