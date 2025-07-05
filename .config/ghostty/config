@@ -1,4 +1,5 @@
-theme = "Galaxy"
+theme = "Adventure"
+background-opacity = 0.95
 
 # Search entire scrollback history in default text editor
 # keybind = cmd+f=write_scrollback_file:open
@@ -23,7 +24,7 @@ adjust-underline-thickness = -50%
 shell-integration = zsh
 shell-integration-features = sudo
 
-font-family = "VictorMono NFM Medium"
+font-family = "RobotoMono Nerd Font Mono"
 font-size = 13
 
 window-save-state = "always"
