@@ -28,3 +28,5 @@ font-family = "RobotoMono Nerd Font Mono"
 font-size = 13
 
 window-save-state = "always"
+window-height = 64
+window-width = 196
