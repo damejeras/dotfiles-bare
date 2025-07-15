@@ -31,6 +31,7 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 zinit light olets/zsh-window-title
+zinit light conda-incubator/conda-zsh-completion
 
 # Configure zsh-syntax-highlighting to disable path highlighting
 ZSH_HIGHLIGHT_STYLES[path]='fg=cyan'
@@ -80,6 +81,7 @@ source $HOME/.shell/functions.zsh
 # Enable shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
+eval "$(direnv hook zsh)"
 
 # Load p10k
 [[ ! -f $HOME/.shell/p10k.zsh ]] || source $HOME/.shell/p10k.zsh
