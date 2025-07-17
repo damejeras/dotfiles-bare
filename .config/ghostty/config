@@ -1,5 +1,4 @@
-theme = "Adventure"
-background-opacity = 0.95
+theme = "DimmedMonokai"
 
 # Search entire scrollback history in default text editor
 # keybind = cmd+f=write_scrollback_file:open
@@ -30,3 +29,4 @@ font-size = 13
 window-save-state = "always"
 window-height = 64
 window-width = 196
+keybind = shift+enter=text:\n
