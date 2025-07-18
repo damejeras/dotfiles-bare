@@ -65,28 +65,12 @@ function _session() {
     fi
 }
 
-# Load history
-function _shared_history() {
-    local time=${1:-1h}
-    local limit=${2:-100}
-    local selected=$(logcli query '{service_name="zsh"}' --since=$time --limit=$limit --addr=$HISTORY_LOKI_HOST --username=$HISTORY_LOKI_USERNAME --password=$HISTORY_LOKI_PASSWORD --output raw 2>/dev/null | tr '\n' '\0' | sed 's/↵/\n/g' | fzf --read0)
-    [[ -n "$selected" ]] && print -z "$selected"
-}
-
 # Install custom prompts
 function _install_fabric_prompts() {
 	mkdir -p ~/.config/fabric/patterns/
 	cp -a ~/.prompts/* ~/.config/fabric/patterns/
 }
 
-# Load promtail
-function _load_promtail {
-	launchctl unload $HOME/Library/LaunchAgents/promtail.plist
-	envsubst < $HOME/.shell/promtail/promtail.template.plist > $HOME/.shell/promtail/promtail.plist
-	envsubst < $HOME/.shell/promtail/config.template.yaml > $HOME/.shell/promtail/config.yaml
-	cp $HOME/.shell/promtail/promtail.plist $HOME/Library/LaunchAgents/promtail.plist
-	launchctl load $HOME/Library/LaunchAgents/promtail.plist
-}
 
 function kwipe() {
   local ns="$1"
@@ -126,6 +110,5 @@ compdef _kwipe_namespace_complete kwipe
 # This is a hack to prevent adding functions to history.
 alias assist=" _assist"
 alias t=" _session"
-alias h=" _shared_history"
 
 
