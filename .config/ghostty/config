@@ -1,4 +1,5 @@
 theme = "DimmedMonokai"
+cursor-invert-fg-bg = true
 
 # Optional underline adjustments
 adjust-underline-position = 1
