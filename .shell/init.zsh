@@ -69,9 +69,6 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 # Source secrets
 source $HOME/.shell/secrets.zsh
 
-# Source history
-source $HOME/.shell/history.zsh
-
 # Source aliases
 source $HOME/.shell/aliases.zsh
 

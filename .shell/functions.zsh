@@ -1,6 +1,6 @@
 # Assistant
 function _assist() {
-  output=$(echo -n "$@" | fabric --pattern shell_command)
+  output=$(echo -n "$@" | fabric-ai --pattern shell_command)
   echo "$output"
   vared -p "Do you want to evaluate the command? (y/n) " -c choice
   if [[ $choice == y ]]; then
@@ -63,12 +63,6 @@ function _session() {
             tmux switch-client -t "$SESSION"
         fi
     fi
-}
-
-# Install custom prompts
-function _install_fabric_prompts() {
-	mkdir -p ~/.config/fabric/patterns/
-	cp -a ~/.prompts/* ~/.config/fabric/patterns/
 }
 
 
