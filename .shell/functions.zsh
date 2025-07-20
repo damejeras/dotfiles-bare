@@ -65,6 +65,9 @@ function _session() {
     fi
 }
 
+function _randomizer() {
+  "$HOME/.shell/randimizer.sh" "$@"
+}
 
 function kwipe() {
   local ns="$1"
@@ -104,5 +107,6 @@ compdef _kwipe_namespace_complete kwipe
 # This is a hack to prevent adding functions to history.
 alias assist=" _assist"
 alias t=" _session"
+alias randomizer=" _randomizer"
 
 
