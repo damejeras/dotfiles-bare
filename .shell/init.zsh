@@ -1,14 +1,3 @@
-# Make sure Homebrew is available.
-if ! command -v brew &> /dev/null; then
-    echo "Homebrew is not in PATH."
-    return 1
-fi
-
-# Install the necessary tools.
-if ! command -v fzf &>/dev/null || ! command -v zoxide &>/dev/null; then
-	brew bundle --file $HOME/.shell/Brewfile
-fi
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
